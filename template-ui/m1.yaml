@@ -32,17 +32,13 @@ spec:
           ui:autofocus: true
           ui:options:
             rows: 5
-        user:
-          title:  user
-          type: string
-          ui:field: signed-in-user    
         subscription:
           title: Awesome Merger 
           description: Custom Extension support consumers to merge the fields and string with custom delimiter, custom regex validaion etc. 
           type: string
           ui:options:
             # form: ["IT APP", "${{ parameters.name}}"]
-            form: ["IT APP-", "${{ parameters.name}}","_", "${{ parameters.name}}", "*", "${{parameters.team.user}}"]
+            form: ["IT APP-", "${{ parameters.name}}","_", "${{ parameters.name}}"]
             delimiter: "$$$"
             regexExp: "^IT APP-"
             disable: false
