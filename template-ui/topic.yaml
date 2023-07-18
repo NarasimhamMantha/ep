@@ -2,11 +2,10 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: create-topic-muziris-template
-  title: "Kafka: Create Kafka Topic in Confluent Cloud"
-  # Changed Description to clarify what the template does
+  title: 'Kafka: Create Kafka Topic in Confluent Cloud'
   annotations:
-    mnscorp.net/tutorial-url: "https://confluence.marksandspencer.app/display/CGE/Topic+creation"
-  description: "Step-2: To create a Topic in Confluent Cloud, use this template."
+    mnscorp.net/tutorial-url: 'https://confluence.marksandspencer.app/display/CGE/Topic+creation'
+  description: 'Step-2: To create a Topic in Confluent Cloud, use this template.'
   tags:
     - kafka
     - confluent
@@ -15,7 +14,6 @@ metadata:
 spec:
   owner: events-platform
   type: service
-
   parameters:
     - title: Topic Details
       description: Provide details on Topic
@@ -25,7 +23,7 @@ spec:
       properties:
         env_group:
           type: object
-          title: ""
+          title: ''
           required:
             - environment
             - domain
@@ -45,7 +43,7 @@ spec:
             environment:
               type: string
               title: Name of the Environment for Topic
-              ui:autofocus: true
+              'ui:autofocus': true
               enumNames:
                 - Development
                 - Performance
@@ -58,7 +56,7 @@ spec:
             domain:
               type: string
               title: Name of the Domain
-              ui:autofocus: true
+              'ui:autofocus': true
               enumNames:
                 - Contact
                 - Campaign
@@ -106,7 +104,7 @@ spec:
               default: Contact
             technology_group:
               type: object
-              title: ""
+              title: ''
               required:
                 - tech_group
                 - product_group
@@ -114,7 +112,7 @@ spec:
                 tech_group:
                   type: string
                   title: Technology Group
-                  ui:autofocus: true
+                  'ui:autofocus': true
                   enumNames:
                     - Customer Channels
                     - Store Operations
@@ -141,7 +139,7 @@ spec:
                         product_group:
                           type: string
                           title: Product Group
-                          ui:autofocus: true
+                          'ui:autofocus': true
                           enumNames:
                             - BEAM
                             - Personalisation
@@ -203,7 +201,7 @@ spec:
                         product_group:
                           type: string
                           title: Product Group
-                          ui:autofocus: true
+                          'ui:autofocus': true
                           enumNames:
                             - Intelligent Store
                             - Device Platforms
@@ -227,7 +225,7 @@ spec:
                         product_group:
                           type: string
                           title: Product Group
-                          ui:autofocus: true
+                          'ui:autofocus': true
                           enumNames:
                             - Clothing and Home Product Flow
                             - Foods Product Flow
@@ -255,14 +253,14 @@ spec:
                         product_group:
                           type: string
                           title: Product Group
-                          ui:autofocus: true
+                          'ui:autofocus': true
                           enumNames:
                             - Clothing and Home Plan
                             - Foods Plan
                             - International Plan
-                            - Clothing and Home Design, Buy, Make
-                            - Foods Design, Buy, Make
-                            - International Design, Buy, Make
+                            - 'Clothing and Home Design, Buy, Make'
+                            - 'Foods Design, Buy, Make'
+                            - 'International Design, Buy, Make'
                             - Clothing and Home Brands
                           enum:
                             - chpl
@@ -279,7 +277,7 @@ spec:
                         product_group:
                           type: string
                           title: Product Group
-                          ui:autofocus: true
+                          'ui:autofocus': true
                           enumNames:
                             - Enterprise Service
                             - Runtime
@@ -290,7 +288,7 @@ spec:
                             - Colleague Technology
                             - Integration Services
                             - Community Technology
-                            - Connectivity, Services and Solutions
+                            - 'Connectivity, Services and Solutions'
                             - Cloud9
                           enum:
                             - es
@@ -311,7 +309,7 @@ spec:
                         product_group:
                           type: string
                           title: Product Group
-                          ui:autofocus: true
+                          'ui:autofocus': true
                           enumNames:
                             - Finance
                             - Corporate Service
@@ -328,7 +326,7 @@ spec:
                         product_group:
                           type: string
                           title: Product Group
-                          ui:autofocus: true
+                          'ui:autofocus': true
                           enumNames:
                             - Ocado
                             - Company Name
@@ -339,19 +337,21 @@ spec:
             team_name:
               type: string
               title: Name of the team
-              description: "Name of the Team. Only alphabets allowed. Maximum 37 characters. eg: events"
-              pattern: ^[a-z]+$
-              ui:autofocus: true
+              description: >-
+                Name of the Team. Only alphabets allowed. Maximum 37 characters.
+                eg: events
+              pattern: '^[a-z]+$'
+              'ui:autofocus': true
               maxLength: 37
             application_id:
               type: object
               title: Application Id
-              description: "Application Id of the Team (mandatory) *"
+              description: Application Id of the Team (mandatory) *
             topic_category:
               type: string
               title: Category of topic (Public/Private)
-              ui:autofocus: true
-              ui:widget: radio
+              'ui:autofocus': true
+              'ui:widget': radio
               enumNames:
                 - Public
                 - Private
@@ -366,16 +366,21 @@ spec:
             functional_area:
               type: string
               title: Functional Area of the Topic
-              description: "Topic Functional Area (Service/Application). Only alphanumeric with underscore(_) allowed. Maximum 50 characters. eg: pub_events or inbound_service"
-              ui:autofocus: true
-              pattern: ^[a-z0-9_]+$
+              description: >-
+                Topic Functional Area (Service/Application). Only alphanumeric
+                with underscore(_) allowed. Maximum 50 characters. eg:
+                pub_events or inbound_service
+              'ui:autofocus': true
+              pattern: '^[a-z0-9_]+$'
               maxLength: 50
             topic_description:
               type: string
               title: Description for Topic
-              description: "Topic Description. Only alphanumeric with underscore(_) allowed. Maximum 70 characters. eg: click_info"
-              pattern: ^[a-z0-9_]+$
-              ui:autofocus: true
+              description: >-
+                Topic Description. Only alphanumeric with underscore(_) allowed.
+                Maximum 70 characters. eg: click_info
+              pattern: '^[a-z0-9_]+$'
+              'ui:autofocus': true
               maxLength: 70
           dependencies:
             environment:
@@ -387,15 +392,15 @@ spec:
                     partitions:
                       type: integer
                       title: Number of partition of the topic
-                      description: "Number of partition of the topic. Maximum 1 partition"
-                      ui:autofocus: true
+                      description: Number of partition of the topic. Maximum 1 partition
+                      'ui:autofocus': true
                       default: 1
                       minimum: 1
                       maximum: 1
                     retention_time:
                       type: integer
                       title: Retention Time
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - 1 hour
                         - 1 day
@@ -408,7 +413,7 @@ spec:
                     retention_size:
                       type: integer
                       title: Retention Size
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - 1 MB
                         - 100 MB
@@ -425,14 +430,16 @@ spec:
                     message_max_size:
                       type: integer
                       title: Message Maximum size in bytes
-                      description: "Message Maximum size in bytes. Should be <= 20971520 (20MB) "
-                      ui:autofocus: true
+                      description: >-
+                        Message Maximum size in bytes. Should be <= 20971520
+                        (20MB) 
+                      'ui:autofocus': true
                       default: 2097164
                       maximum: 20971520
                     cleanup_policy:
                       type: string
                       title: Topic Cleanup policy
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - Delete
                         - Compact
@@ -443,16 +450,22 @@ spec:
                     async_api_url:
                       type: string
                       title: Async API Url
-                      description: "Async API URL. eg: https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml"
+                      description: >-
+                        Async API URL. eg:
+                        https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml
                       format: url
-                      ui:autofocus: true
+                      'ui:autofocus': true
                     email_addresses:
                       type: string
                       title: Email Addresses of team
-                      description: "Email Addresses of the Team. Email addresses should be ending with mnscorp.net and multiple emails should be separated by (;). eg: john.smith@mnscorp.net;tony.blaze@mnscorp.net"
+                      description: >-
+                        Email Addresses of the Team. Email addresses should be
+                        ending with mnscorp.net and multiple emails should be
+                        separated by (;). eg:
+                        john.smith@mnscorp.net;tony.blaze@mnscorp.net
                       format: text
-                      pattern: ^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$
-                      ui:autofocus: true
+                      pattern: '^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$'
+                      'ui:autofocus': true
                       maxLength: 500
                 - properties:
                     environment:
@@ -461,15 +474,15 @@ spec:
                     partitions:
                       type: integer
                       title: Number of parition of the topic
-                      description: "Number of partition of the topic. Maximum 6 partitions"
-                      ui:autofocus: true
+                      description: Number of partition of the topic. Maximum 6 partitions
+                      'ui:autofocus': true
                       default: 1
                       minimum: 1
                       maximum: 6
                     retention_time:
                       type: integer
                       title: Retention Time (Don't choose Infinite unless necessary)
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - 1 hour
                         - 1 day
@@ -488,7 +501,7 @@ spec:
                     retention_size:
                       type: integer
                       title: Retention Size (Don't choose Infinite unless necessary)
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - 1 MB
                         - 100 MB
@@ -507,14 +520,16 @@ spec:
                     message_max_size:
                       type: integer
                       title: Message Maximum size in bytes
-                      description: "Message Maximum size in bytes. Should be <= 8388608 (8MB) "
-                      ui:autofocus: true
+                      description: >-
+                        Message Maximum size in bytes. Should be <= 8388608
+                        (8MB) 
+                      'ui:autofocus': true
                       default: 2097164
                       maximum: 8388608
                     cleanup_policy:
                       type: string
                       title: Topic Cleanup policy
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - Delete
                         - Compact
@@ -525,16 +540,22 @@ spec:
                     async_api_url:
                       type: string
                       title: Async API Url
-                      description: "Async API URL. eg: https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml"
+                      description: >-
+                        Async API URL. eg:
+                        https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml
                       format: url
-                      ui:autofocus: true
+                      'ui:autofocus': true
                     email_addresses:
                       type: string
                       title: Email Addresses of team
-                      description: "Email Addresses of the Team. Email addresses should be ending with mnscorp.net and multiple emails should be separated by (;). eg: john.smith@mnscorp.net;tony.blaze@mnscorp.net"
+                      description: >-
+                        Email Addresses of the Team. Email addresses should be
+                        ending with mnscorp.net and multiple emails should be
+                        separated by (;). eg:
+                        john.smith@mnscorp.net;tony.blaze@mnscorp.net
                       format: text
-                      pattern: ^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$
-                      ui:autofocus: true
+                      pattern: '^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$'
+                      'ui:autofocus': true
                       maxLength: 500
                 - properties:
                     environment:
@@ -543,15 +564,15 @@ spec:
                     partitions:
                       type: integer
                       title: Number of parition of the topic
-                      description: "Number of partition of the topic. Maximum 6 partitions"
-                      ui:autofocus: true
+                      description: Number of partition of the topic. Maximum 6 partitions
+                      'ui:autofocus': true
                       default: 1
                       minimum: 1
                       maximum: 6
                     retention_time:
                       type: integer
                       title: Retention Time (Don't choose Infinite unless necessary)
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - 1 hour
                         - 1 day
@@ -570,7 +591,7 @@ spec:
                     retention_size:
                       type: integer
                       title: Retention Size (Don't choose Infinite unless necessary)
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - 1 MB
                         - 100 MB
@@ -589,14 +610,16 @@ spec:
                     message_max_size:
                       type: integer
                       title: Message Maximum size in bytes
-                      description: "Message Maximum size in bytes. Should be <= 20971520 (20MB) "
-                      ui:autofocus: true
+                      description: >-
+                        Message Maximum size in bytes. Should be <= 20971520
+                        (20MB) 
+                      'ui:autofocus': true
                       default: 2097164
                       maximum: 20971520
                     cleanup_policy:
                       type: string
                       title: Topic Cleanup policy
-                      ui:autofocus: true
+                      'ui:autofocus': true
                       enumNames:
                         - Delete
                         - Compact
@@ -607,62 +630,96 @@ spec:
                     async_api_url:
                       type: string
                       title: Async API Url
-                      description: "Async API URL. eg: https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml"
+                      description: >-
+                        Async API URL. eg:
+                        https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml
                       format: url
-                      ui:autofocus: true
+                      'ui:autofocus': true
                     email_addresses:
                       type: string
                       title: Email Addresses of team
-                      description: "Email Addresses of the Team. Email addresses should be ending with mnscorp.net and multiple emails should be separated by (;). eg: john.smith@mnscorp.net;tony.blaze@mnscorp.net"
+                      description: >-
+                        Email Addresses of the Team. Email addresses should be
+                        ending with mnscorp.net and multiple emails should be
+                        separated by (;). eg:
+                        john.smith@mnscorp.net;tony.blaze@mnscorp.net
                       format: text
-                      pattern: ^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$
-                      ui:autofocus: true
+                      pattern: '^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$'
+                      'ui:autofocus': true
                       maxLength: 500
-
   steps:
     - id: fetchBase
       name: Fetch Base
-      action: fetch:template
+      action: 'fetch:template'
       input:
         url: ./template
         values:
           name: '${{parameters.application_name}}'
-          destination: 'github.com?repo=events-platform-resource-selfserve&owner=DigitalInnovation'
+          destination: >-
+            github.com?repo=events-platform-resource-selfserve&owner=DigitalInnovation
     - id: fetchInput
       name: Fetch Template inputs
-      action: fetch:template
+      action: 'fetch:template'
       input:
         url: ./skeleton/topic
         values:
-          name: "${{ parameters.env_group.technology_group.tech_group }}-${{ parameters.env_group.technology_group.product_group }}-${{ parameters.env_group.team_name }}{%if parameters.env_group.topic_category != 'pub' %}-${{ parameters.env_group.topic_category }}{%endif%}-${{ parameters.env_group.application_id.appId|lower }}-${{ parameters.env_group.functional_area }}-${{ parameters.env_group.topic_description }}{%if parameters.env_group.dlq %}-dlq{%endif%}"
-          environment: "${{ parameters.env_group.environment }}"
-          domain: "${{ parameters.env_group.domain }}"
-          tech_group: "${{ parameters.env_group.technology_group.tech_group }}"
-          product_group: "${{ parameters.env_group.technology_group.product_group }}"
-          topic_category: "${{ parameters.env_group.topic_category }}"
-          team_name: "${{ parameters.env_group.team_name }}"
-          functional_area: "${{ parameters.env_group.functional_area }}"
-          application_id: "${{ parameters.env_group.application_id.appId|lower }}"
-          description: "${{ parameters.env_group.description }}"
-          partitions: "${{ parameters.env_group.partitions }}"
-          retention_time: "${{ parameters.env_group.retention_time }}"
-          retention_size: "${{ parameters.env_group.retention_size }}"
-          message_max_size: "${{ parameters.env_group.message_max_size }}"
-          cleanup_policy: "${{ parameters.env_group.cleanup_policy }}"
-          async_api_url: "${{ parameters.env_group.async_api_url }}"
-          email_addresses: "${{ parameters.env_group.email_addresses }}"
+          name: >-
+            ${{ parameters.env_group.technology_group.tech_group }}-${{
+            parameters.env_group.technology_group.product_group }}-${{
+            parameters.env_group.team_name }}{%if
+            parameters.env_group.topic_category != 'pub' %}-${{
+            parameters.env_group.topic_category }}{%endif%}-${{
+            parameters.env_group.application_id.appId|lower }}-${{
+            parameters.env_group.functional_area }}-${{
+            parameters.env_group.topic_description }}{%if
+            parameters.env_group.dlq %}-dlq{%endif%}
+          environment: '${{ parameters.env_group.environment }}'
+          domain: '${{ parameters.env_group.domain }}'
+          tech_group: '${{ parameters.env_group.technology_group.tech_group }}'
+          product_group: '${{ parameters.env_group.technology_group.product_group }}'
+          topic_category: '${{ parameters.env_group.topic_category }}'
+          team_name: '${{ parameters.env_group.team_name }}'
+          functional_area: '${{ parameters.env_group.functional_area }}'
+          application_id: '${{ parameters.env_group.application_id.appId|lower }}'
+          description: '${{ parameters.env_group.description }}'
+          partitions: '${{ parameters.env_group.partitions }}'
+          retention_time: '${{ parameters.env_group.retention_time }}'
+          retention_size: '${{ parameters.env_group.retention_size }}'
+          message_max_size: '${{ parameters.env_group.message_max_size }}'
+          cleanup_policy: '${{ parameters.env_group.cleanup_policy }}'
+          async_api_url: '${{ parameters.env_group.async_api_url }}'
+          email_addresses: '${{ parameters.env_group.email_addresses }}'
     - id: publish
       name: Publish
-      action: publish:github:pull-request
+      action: 'publish:github:pull-request'
       input:
-        repoUrl: 'github.com?repo=events-platform-resource-selfserve&owner=DigitalInnovation'
-        title: "create-topic-${{ parameters.env_group.technology_group.tech_group }}-${{ parameters.env_group.technology_group.product_group }}-${{ parameters.env_group.team_name }}{%if parameters.env_group.topic_category != 'pub' %}-${{ parameters.env_group.topic_category }}{%endif%}-${{ parameters.env_group.application_id.appId|lower }}-${{ parameters.env_group.functional_area }}-${{ parameters.env_group.topic_description }}{%if parameters.env_group.dlq %}-dlq{%endif%}"
-        branchName: "create-topic-${{ parameters.env_group.technology_group.tech_group }}-${{ parameters.env_group.technology_group.product_group }}-${{ parameters.env_group.team_name }}{%if parameters.env_group.topic_category != 'pub' %}-${{ parameters.env_group.topic_category }}{%endif%}-${{ parameters.env_group.application_id.appId|lower }}-${{ parameters.env_group.functional_area }}-${{ parameters.env_group.topic_description }}{%if parameters.env_group.dlq %}-dlq{%endif%}"
+        repoUrl: >-
+          github.com?repo=events-platform-resource-selfserve&owner=DigitalInnovation
+        title: >-
+          create-topic-${{ parameters.env_group.technology_group.tech_group
+          }}-${{ parameters.env_group.technology_group.product_group }}-${{
+          parameters.env_group.team_name }}{%if
+          parameters.env_group.topic_category != 'pub' %}-${{
+          parameters.env_group.topic_category }}{%endif%}-${{
+          parameters.env_group.application_id.appId|lower }}-${{
+          parameters.env_group.functional_area }}-${{
+          parameters.env_group.topic_description }}{%if parameters.env_group.dlq
+          %}-dlq{%endif%}
+        branchName: >-
+          create-topic-${{ parameters.env_group.technology_group.tech_group
+          }}-${{ parameters.env_group.technology_group.product_group }}-${{
+          parameters.env_group.team_name }}{%if
+          parameters.env_group.topic_category != 'pub' %}-${{
+          parameters.env_group.topic_category }}{%endif%}-${{
+          parameters.env_group.application_id.appId|lower }}-${{
+          parameters.env_group.functional_area }}-${{
+          parameters.env_group.topic_description }}{%if parameters.env_group.dlq
+          %}-dlq{%endif%}
         gitAuthorName: '${{ user.entity.metadata.name }}'
         gitAuthorEmail: '${{ user.entity.spec.profile.email }}'
         description: |
           # New project: Kafka topic
-        targetPath: 'muziris-input/topic'
+        targetPath: muziris-input/topic
   output:
     links:
       - title: Follow link to Github repo and Pull request for next steps
