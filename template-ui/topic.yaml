@@ -347,7 +347,7 @@ spec:
               type: object
               title: Application Id
               description: "Application Id of the Team (mandatory) *"
-              topic_category:
+            topic_category:
               type: string
               title: Category of topic (Public/Private)
               ui:autofocus: true
