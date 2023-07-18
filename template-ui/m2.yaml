@@ -1,0 +1,52 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: upsert-applicationID
+  title: Add Application to Component
+  description: This template is used to upsert Application Id to  component name
+  tags:
+    - appid
+    - upsert
+  finops:
+    cost: £10/month
+    carbonfootprint: 0.0478
+    
+spec:
+  owner: cloud-services-and-automation
+  type: service
+
+  parameters:
+    - title: Enter Fields
+      required:
+        - componenthopper
+      properties:
+        componenthopper:
+          title: Catalogue Name
+          type: object
+          ui:field: component-hopper
+          description: Choose the Component Name from the list
+        app: 
+          type: object
+          ui:field: Application
+        user:
+          title:  user
+          type: string
+          ui:field: signed-in-user 
+          ui:options: 
+            hide : true
+            
+  steps:
+    - id: backstage_request
+      name: backstage request
+      action: http:backstage:request
+      input:
+        method: 'POST'
+        path: '/api/appId'
+        headers:
+          content-type: 'application/json'
+        body:
+          entityName: ${{ parameters.componenthopper.componentName }}
+          appId: ${{ parameters.app.appId }}
+          appName: ${{ parameters.app.appName }}
+          productName:  ${{ parameters.app.primaryProduct }}
+          createdBy: ${{ parameters.user }}
