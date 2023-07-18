@@ -1,0 +1,669 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: create-topic-muziris-template
+  title: "Kafka: Create Kafka Topic in Confluent Cloud"
+  # Changed Description to clarify what the template does
+  annotations:
+    mnscorp.net/tutorial-url: "https://confluence.marksandspencer.app/display/CGE/Topic+creation"
+  description: "Step-2: To create a Topic in Confluent Cloud, use this template."
+  tags:
+    - kafka
+    - confluent
+    - confluentcloud
+    - topic
+spec:
+  owner: events-platform
+  type: service
+
+  parameters:
+    - title: Topic Details
+      description: Provide details on Topic
+      type: object
+      required:
+        - env_group
+      properties:
+        env_group:
+          type: object
+          title: ""
+          required:
+            - environment
+            - domain
+            - team_name
+            - functional_area
+            - application_id
+            - topic_category
+            - topic_description
+            - partitions
+            - retention_time
+            - retention_size
+            - message_max_size
+            - cleanup_policy
+            - async_api_url
+            - email_addresses
+          properties:
+            environment:
+              type: string
+              title: Name of the Environment for Topic
+              ui:autofocus: true
+              enumNames:
+                - Development
+                - Performance
+                - Production
+              enum:
+                - dev
+                - perf
+                - prod
+              default: dev
+            domain:
+              type: string
+              title: Name of the Domain
+              ui:autofocus: true
+              enumNames:
+                - Contact
+                - Campaign
+                - Search & Recommendation
+                - Price
+                - Stored Value
+                - Task
+                - Order fulfilment
+                - Demand
+                - Digital Content
+                - Customer Profile
+                - Customer Order
+                - Payment
+                - Stock
+                - Transport
+                - Product
+                - Range
+                - Loss prevention
+                - Colleague
+                - Ledger
+                - Identity
+                - Location
+              enum:
+                - Contact
+                - Campaign
+                - Search & Recommendation
+                - Price
+                - Stored Value
+                - Task
+                - Order fulfilment
+                - Demand
+                - Digital Content
+                - Customer Profile
+                - Customer Order
+                - Payment
+                - Stock
+                - Transport
+                - Product
+                - Range
+                - Loss prevention
+                - Colleague
+                - Ledger
+                - Identity
+                - Location
+              default: Contact
+            technology_group:
+              type: object
+              title: ""
+              required:
+                - tech_group
+                - product_group
+              properties:
+                tech_group:
+                  type: string
+                  title: Technology Group
+                  ui:autofocus: true
+                  enumNames:
+                    - Customer Channels
+                    - Store Operations
+                    - Supply Chain
+                    - Commercial Trading
+                    - Group Technology Services and Architechture
+                    - Group Support
+                    - External
+                  enum:
+                    - cust
+                    - str
+                    - sc
+                    - ct
+                    - gts
+                    - gs
+                    - ext
+                  default: cust
+              dependencies:
+                tech_group:
+                  oneOf:
+                    - properties:
+                        tech_group:
+                          const: cust
+                        product_group:
+                          type: string
+                          title: Product Group
+                          ui:autofocus: true
+                          enumNames:
+                            - BEAM
+                            - Personalisation
+                            - Apps
+                            - Loyalty
+                            - Banking and Services
+                            - Shopping
+                            - Brands and Payments
+                            - Foods and Gifting
+                            - Fulfilment
+                            - International
+                            - Local Technical Platforms
+                            - Common capabilities and local services
+                            - DotCom Capabilites
+                            - Projects/Programmes
+                            - Platform and Services
+                            - Store Trial(10x)
+                            - Omnichannel
+                            - Point of sale
+                            - Decisioning
+                            - Customer account
+                            - Content and Acquisition
+                            - Browse and select
+                            - 3P Brands
+                            - Digital selling
+                            - Store check out
+                            - RIT/RIS
+                          enum:
+                            - beam
+                            - perso
+                            - app
+                            - loyal
+                            - bank
+                            - shop
+                            - pay
+                            - fdgf
+                            - ful
+                            - int
+                            - ltp
+                            - ccls
+                            - dotcom
+                            - prjpg
+                            - plat
+                            - tenx
+                            - omni
+                            - pos
+                            - decis
+                            - accou
+                            - cnacq
+                            - brwse
+                            - brand
+                            - digsl
+                            - strco
+                            - rit
+                          default: beam
+                    - properties:
+                        tech_group:
+                          const: str
+                        product_group:
+                          type: string
+                          title: Product Group
+                          ui:autofocus: true
+                          enumNames:
+                            - Intelligent Store
+                            - Device Platforms
+                            - C&H Store Operations
+                            - Food Store Operations
+                            - Retail Services
+                            - Management
+                            - Connected Colleague
+                          enum:
+                            - intel
+                            - devc
+                            - chso
+                            - fdso
+                            - rtls
+                            - mngt
+                            - concl
+                          default: intel
+                    - properties:
+                        tech_group:
+                          const: sc
+                        product_group:
+                          type: string
+                          title: Product Group
+                          ui:autofocus: true
+                          enumNames:
+                            - Clothing and Home Product Flow
+                            - Foods Product Flow
+                            - International Product Flow
+                            - Clothing and Home Warehousing
+                            - Foods Warehousing
+                            - International Warehousing
+                            - Clothing and Home Transport
+                            - Foods Transport
+                            - International Transport
+                          enum:
+                            - chpf
+                            - fdpf
+                            - intpf
+                            - chwh
+                            - fdwh
+                            - intwh
+                            - chtp
+                            - fdtp
+                            - inttp
+                          default: chpf
+                    - properties:
+                        tech_group:
+                          const: ct
+                        product_group:
+                          type: string
+                          title: Product Group
+                          ui:autofocus: true
+                          enumNames:
+                            - Clothing and Home Plan
+                            - Foods Plan
+                            - International Plan
+                            - Clothing and Home Design, Buy, Make
+                            - Foods Design, Buy, Make
+                            - International Design, Buy, Make
+                            - Clothing and Home Brands
+                          enum:
+                            - chpl
+                            - fdpl
+                            - intpl
+                            - chdm
+                            - fddm
+                            - intdm
+                            - chbr
+                          default: chpl
+                    - properties:
+                        tech_group:
+                          const: gts
+                        product_group:
+                          type: string
+                          title: Product Group
+                          ui:autofocus: true
+                          enumNames:
+                            - Enterprise Service
+                            - Runtime
+                            - Enterprise Cloud Platform
+                            - On-Premise
+                            - App Definition & Development
+                            - Workspace Tech
+                            - Colleague Technology
+                            - Integration Services
+                            - Community Technology
+                            - Connectivity, Services and Solutions
+                            - Cloud9
+                          enum:
+                            - es
+                            - rntim
+                            - ecp
+                            - oprem
+                            - add
+                            - wrksp
+                            - coll
+                            - integ
+                            - comu
+                            - css
+                            - nine
+                          default: es
+                    - properties:
+                        tech_group:
+                          const: gs
+                        product_group:
+                          type: string
+                          title: Product Group
+                          ui:autofocus: true
+                          enumNames:
+                            - Finance
+                            - Corporate Service
+                            - Bank Loyalty
+                            - HR
+                          enum:
+                            - fin
+                            - cs
+                            - hr
+                          default: fin
+                    - properties:
+                        tech_group:
+                          const: ext
+                        product_group:
+                          type: string
+                          title: Product Group
+                          ui:autofocus: true
+                          enumNames:
+                            - Ocado
+                            - Company Name
+                          enum:
+                            - ocado
+                            - xyz
+                          default: ocado
+            team_name:
+              type: string
+              title: Name of the team
+              description: "Name of the Team. Only alphabets allowed. Maximum 37 characters. eg: events"
+              pattern: ^[a-z]+$
+              ui:autofocus: true
+              maxLength: 37
+            application_id:
+              type: object
+              title: Application Id
+              description: "Application Id of the Team (mandatory) *"
+              topic_category:
+              type: string
+              title: Category of topic (Public/Private)
+              ui:autofocus: true
+              ui:widget: radio
+              enumNames:
+                - Public
+                - Private
+              enum:
+                - pub
+                - pvt
+              default: pub
+            dlq:
+              type: boolean
+              title: Dead Letter Queue(DLQ)
+              default: false
+            functional_area:
+              type: string
+              title: Functional Area of the Topic
+              description: "Topic Functional Area (Service/Application). Only alphanumeric with underscore(_) allowed. Maximum 50 characters. eg: pub_events or inbound_service"
+              ui:autofocus: true
+              pattern: ^[a-z0-9_]+$
+              maxLength: 50
+            topic_description:
+              type: string
+              title: Description for Topic
+              description: "Topic Description. Only alphanumeric with underscore(_) allowed. Maximum 70 characters. eg: click_info"
+              pattern: ^[a-z0-9_]+$
+              ui:autofocus: true
+              maxLength: 70
+          dependencies:
+            environment:
+              oneOf:
+                - properties:
+                    environment:
+                      enum:
+                        - dev
+                    partitions:
+                      type: integer
+                      title: Number of partition of the topic
+                      description: "Number of partition of the topic. Maximum 1 partition"
+                      ui:autofocus: true
+                      default: 1
+                      minimum: 1
+                      maximum: 1
+                    retention_time:
+                      type: integer
+                      title: Retention Time
+                      ui:autofocus: true
+                      enumNames:
+                        - 1 hour
+                        - 1 day
+                        - 1 week
+                      enum:
+                        - 3600000
+                        - 86400000
+                        - 604800000
+                      default: 604800000
+                    retention_size:
+                      type: integer
+                      title: Retention Size
+                      ui:autofocus: true
+                      enumNames:
+                        - 1 MB
+                        - 100 MB
+                        - 500 MB
+                        - 1 GB
+                        - 1 TB
+                      enum:
+                        - 1048576
+                        - 104857600
+                        - 524288000
+                        - 1073741824
+                        - 1099511627776
+                      default: 524288000
+                    message_max_size:
+                      type: integer
+                      title: Message Maximum size in bytes
+                      description: "Message Maximum size in bytes. Should be <= 20971520 (20MB) "
+                      ui:autofocus: true
+                      default: 2097164
+                      maximum: 20971520
+                    cleanup_policy:
+                      type: string
+                      title: Topic Cleanup policy
+                      ui:autofocus: true
+                      enumNames:
+                        - Delete
+                        - Compact
+                      enum:
+                        - delete
+                        - compact
+                      default: delete
+                    async_api_url:
+                      type: string
+                      title: Async API Url
+                      description: "Async API URL. eg: https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml"
+                      format: url
+                      ui:autofocus: true
+                    email_addresses:
+                      type: string
+                      title: Email Addresses of team
+                      description: "Email Addresses of the Team. Email addresses should be ending with mnscorp.net and multiple emails should be separated by (;). eg: john.smith@mnscorp.net;tony.blaze@mnscorp.net"
+                      format: text
+                      pattern: ^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$
+                      ui:autofocus: true
+                      maxLength: 500
+                - properties:
+                    environment:
+                      enum:
+                        - perf
+                    partitions:
+                      type: integer
+                      title: Number of parition of the topic
+                      description: "Number of partition of the topic. Maximum 6 partitions"
+                      ui:autofocus: true
+                      default: 1
+                      minimum: 1
+                      maximum: 6
+                    retention_time:
+                      type: integer
+                      title: Retention Time (Don't choose Infinite unless necessary)
+                      ui:autofocus: true
+                      enumNames:
+                        - 1 hour
+                        - 1 day
+                        - 1 week
+                        - 1 month
+                        - 1 year
+                        - infinite
+                      enum:
+                        - 3600000
+                        - 86400000
+                        - 604800000
+                        - 2592000000
+                        - 31536000000
+                        - -1
+                      default: -1
+                    retention_size:
+                      type: integer
+                      title: Retention Size (Don't choose Infinite unless necessary)
+                      ui:autofocus: true
+                      enumNames:
+                        - 1 MB
+                        - 100 MB
+                        - 500 MB
+                        - 1 GB
+                        - 1 TB
+                        - infinite
+                      enum:
+                        - 1048576
+                        - 104857600
+                        - 524288000
+                        - 1073741824
+                        - 1099511627776
+                        - -1
+                      default: 524288000
+                    message_max_size:
+                      type: integer
+                      title: Message Maximum size in bytes
+                      description: "Message Maximum size in bytes. Should be <= 8388608 (8MB) "
+                      ui:autofocus: true
+                      default: 2097164
+                      maximum: 8388608
+                    cleanup_policy:
+                      type: string
+                      title: Topic Cleanup policy
+                      ui:autofocus: true
+                      enumNames:
+                        - Delete
+                        - Compact
+                      enum:
+                        - delete
+                        - compact
+                      default: delete
+                    async_api_url:
+                      type: string
+                      title: Async API Url
+                      description: "Async API URL. eg: https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml"
+                      format: url
+                      ui:autofocus: true
+                    email_addresses:
+                      type: string
+                      title: Email Addresses of team
+                      description: "Email Addresses of the Team. Email addresses should be ending with mnscorp.net and multiple emails should be separated by (;). eg: john.smith@mnscorp.net;tony.blaze@mnscorp.net"
+                      format: text
+                      pattern: ^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$
+                      ui:autofocus: true
+                      maxLength: 500
+                - properties:
+                    environment:
+                      enum:
+                        - prod
+                    partitions:
+                      type: integer
+                      title: Number of parition of the topic
+                      description: "Number of partition of the topic. Maximum 6 partitions"
+                      ui:autofocus: true
+                      default: 1
+                      minimum: 1
+                      maximum: 6
+                    retention_time:
+                      type: integer
+                      title: Retention Time (Don't choose Infinite unless necessary)
+                      ui:autofocus: true
+                      enumNames:
+                        - 1 hour
+                        - 1 day
+                        - 1 week
+                        - 1 month
+                        - 1 year
+                        - infinite
+                      enum:
+                        - 3600000
+                        - 86400000
+                        - 604800000
+                        - 2592000000
+                        - 31536000000
+                        - -1
+                      default: -1
+                    retention_size:
+                      type: integer
+                      title: Retention Size (Don't choose Infinite unless necessary)
+                      ui:autofocus: true
+                      enumNames:
+                        - 1 MB
+                        - 100 MB
+                        - 500 MB
+                        - 1 GB
+                        - 1 TB
+                        - infinite
+                      enum:
+                        - 1048576
+                        - 104857600
+                        - 524288000
+                        - 1073741824
+                        - 1099511627776
+                        - -1
+                      default: 524288000
+                    message_max_size:
+                      type: integer
+                      title: Message Maximum size in bytes
+                      description: "Message Maximum size in bytes. Should be <= 20971520 (20MB) "
+                      ui:autofocus: true
+                      default: 2097164
+                      maximum: 20971520
+                    cleanup_policy:
+                      type: string
+                      title: Topic Cleanup policy
+                      ui:autofocus: true
+                      enumNames:
+                        - Delete
+                        - Compact
+                      enum:
+                        - delete
+                        - compact
+                      default: delete
+                    async_api_url:
+                      type: string
+                      title: Async API Url
+                      description: "Async API URL. eg: https://github.com/DigitalInnovation/events-platform-asyncapi/blob/main/asyncapis/ct-chbr-stepbrandsproductservice/asyncapi.yaml"
+                      format: url
+                      ui:autofocus: true
+                    email_addresses:
+                      type: string
+                      title: Email Addresses of team
+                      description: "Email Addresses of the Team. Email addresses should be ending with mnscorp.net and multiple emails should be separated by (;). eg: john.smith@mnscorp.net;tony.blaze@mnscorp.net"
+                      format: text
+                      pattern: ^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$
+                      ui:autofocus: true
+                      maxLength: 500
+
+  steps:
+    - id: fetchBase
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./template
+        values:
+          name: '${{parameters.application_name}}'
+          destination: 'github.com?repo=events-platform-resource-selfserve&owner=DigitalInnovation'
+    - id: fetchInput
+      name: Fetch Template inputs
+      action: fetch:template
+      input:
+        url: ./skeleton/topic
+        values:
+          name: "${{ parameters.env_group.technology_group.tech_group }}-${{ parameters.env_group.technology_group.product_group }}-${{ parameters.env_group.team_name }}{%if parameters.env_group.topic_category != 'pub' %}-${{ parameters.env_group.topic_category }}{%endif%}-${{ parameters.env_group.application_id.appId|lower }}-${{ parameters.env_group.functional_area }}-${{ parameters.env_group.topic_description }}{%if parameters.env_group.dlq %}-dlq{%endif%}"
+          environment: "${{ parameters.env_group.environment }}"
+          domain: "${{ parameters.env_group.domain }}"
+          tech_group: "${{ parameters.env_group.technology_group.tech_group }}"
+          product_group: "${{ parameters.env_group.technology_group.product_group }}"
+          topic_category: "${{ parameters.env_group.topic_category }}"
+          team_name: "${{ parameters.env_group.team_name }}"
+          functional_area: "${{ parameters.env_group.functional_area }}"
+          application_id: "${{ parameters.env_group.application_id.appId|lower }}"
+          description: "${{ parameters.env_group.description }}"
+          partitions: "${{ parameters.env_group.partitions }}"
+          retention_time: "${{ parameters.env_group.retention_time }}"
+          retention_size: "${{ parameters.env_group.retention_size }}"
+          message_max_size: "${{ parameters.env_group.message_max_size }}"
+          cleanup_policy: "${{ parameters.env_group.cleanup_policy }}"
+          async_api_url: "${{ parameters.env_group.async_api_url }}"
+          email_addresses: "${{ parameters.env_group.email_addresses }}"
+    - id: publish
+      name: Publish
+      action: publish:github:pull-request
+      input:
+        repoUrl: 'github.com?repo=events-platform-resource-selfserve&owner=DigitalInnovation'
+        title: "create-topic-${{ parameters.env_group.technology_group.tech_group }}-${{ parameters.env_group.technology_group.product_group }}-${{ parameters.env_group.team_name }}{%if parameters.env_group.topic_category != 'pub' %}-${{ parameters.env_group.topic_category }}{%endif%}-${{ parameters.env_group.application_id.appId|lower }}-${{ parameters.env_group.functional_area }}-${{ parameters.env_group.topic_description }}{%if parameters.env_group.dlq %}-dlq{%endif%}"
+        branchName: "create-topic-${{ parameters.env_group.technology_group.tech_group }}-${{ parameters.env_group.technology_group.product_group }}-${{ parameters.env_group.team_name }}{%if parameters.env_group.topic_category != 'pub' %}-${{ parameters.env_group.topic_category }}{%endif%}-${{ parameters.env_group.application_id.appId|lower }}-${{ parameters.env_group.functional_area }}-${{ parameters.env_group.topic_description }}{%if parameters.env_group.dlq %}-dlq{%endif%}"
+        gitAuthorName: '${{ user.entity.metadata.name }}'
+        gitAuthorEmail: '${{ user.entity.spec.profile.email }}'
+        description: |
+          # New project: Kafka topic
+        targetPath: 'muziris-input/topic'
+  output:
+    links:
+      - title: Follow link to Github repo and Pull request for next steps
+        url: '${{steps.publish.output.remoteUrl}}'
