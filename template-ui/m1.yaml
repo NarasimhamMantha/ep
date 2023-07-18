@@ -47,20 +47,3 @@ spec:
             regexExp: "^IT APP-"
             disable: false
             validate: true
-
- 
-  steps:
-    - id: fetchBase
-      name: Fetch Base
-      action: 'fetch:template'
-      input:
-        url: ./template
-        values:
-          name: '${{parameters.application_name}}'
-          destination: >- test
-        gitAuthorName: '${{ user.entity.metadata.name }}'
-        gitAuthorEmail: '${{ user.entity.spec.profile.email }}'
-  output:
-    links:
-      - title: Follow link to Github repo and Pull request for next steps
-        url: '${{steps.publish.output.remoteUrl}}'
