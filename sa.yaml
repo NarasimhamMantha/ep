@@ -1,0 +1,336 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: create-service-account-muziris-template
+  title: "Kafka: Create Service Account in Confluent Cloud"
+  # Changed Description to clarify what the template does
+  annotations:
+    mnscorp.net/tutorial-url: "https://confluence.marksandspencer.app/display/CGE/Service+account+Creation"
+  description: "Step-1: To create a Service Account in Confluent Cloud, use this template."
+  tags:
+    - kafka
+    - confluent
+    - confluentcloud
+    - serviceaccount
+spec:
+  owner: events-platform
+  type: service
+
+  parameters:
+    - title: Service Account Details
+      description: "Provide details on Service Account.
+                    Your team is only allowed two service accounts, one read and one read write.
+                    Service accounts span the entire organization, so they can own API keys for different environments: dev and prod clusters, and/or Kafka and Schema Registry.
+                    Because users can leave or change roles within a company, while applications continue to operate independently, service accounts are needed as they are not be tied to a specific user.
+                    Permissions to topics can be specified using ACLs
+                    See more details here: https://docs.confluent.io/cloud/current/access-management/identity/service-accounts.html#service-accounts"
+      type: object
+      required:
+        - technology_group
+        - team_name
+        - functional_access
+        - description
+        - email_addresses
+      properties:
+        technology_group:
+          type: object
+          title: ""
+          required:
+            - tech_group
+            - product_group
+          properties:
+            serviceaccountcreationlimiter:
+              type: object
+              ui:field: cc-list-serviceaccounts-creation-limiter
+            tech_group:
+              type: string
+              title: Technology Group
+              ui:autofocus: true
+              enumNames:
+                - Customer Channel
+                - Store Operation
+                - Supply Chain
+                - Commercial Treading
+                - Group Technology
+                - Group Support
+                - External
+              enum:
+                - cust
+                - str
+                - sc
+                - ct
+                - gts
+                - gs
+                - ext
+              default: cust
+          dependencies:
+            tech_group:
+              oneOf:
+                - properties:
+                    tech_group:
+                      const: cust
+                    product_group:
+                      type: string
+                      title: Product Group
+                      ui:autofocus: true
+                      enumNames:
+                        - BEAM
+                        - Personalisation
+                        - Apps
+                        - Loyalty
+                        - Banking and Services
+                        - Shopping
+                        - Brands and Payments
+                        - Foods and Gifting
+                        - Fulfilment
+                        - International
+                        - Local Technical Platforms
+                        - Common capabilities and local services
+                        - DotCom Capabilites
+                        - Projects/Programmes
+                        - Platform and Services
+                        - Store Trial(10x)
+                        - Omnichannel
+                        - Point of sale
+                        - Decisioning
+                        - Customer account
+                        - Content and Acquisition
+                        - Browse and select
+                        - 3P Brands
+                        - Digital selling
+                        - Store check out
+                        - RIT/RIS
+                      enum:
+                        - beam
+                        - perso
+                        - app
+                        - loyal
+                        - bank
+                        - shop
+                        - pay
+                        - fdgf
+                        - ful
+                        - int
+                        - ltp
+                        - ccls
+                        - dotcom
+                        - prjpg
+                        - plat
+                        - tenx
+                        - omni
+                        - pos
+                        - decis
+                        - accou
+                        - cnacq
+                        - brwse
+                        - brand
+                        - digsl
+                        - strco
+                        - rit
+                      default: beam
+                - properties:
+                    tech_group:
+                      const: str
+                    product_group:
+                      type: string
+                      title: Product Group
+                      ui:autofocus: true
+                      enumNames:
+                        - Intelligent Store
+                        - Device Platforms
+                        - C&H Store Operations
+                        - Food Store Operations
+                        - Retail Services
+                        - Management
+                        - Connected Colleague
+                      enum:
+                        - intel
+                        - devc
+                        - chso
+                        - fdso
+                        - rtls
+                        - mngt
+                        - concl
+                      default: intel
+                - properties:
+                    tech_group:
+                      const: sc
+                    product_group:
+                      type: string
+                      title: Product Group
+                      ui:autofocus: true
+                      enumNames:
+                        - Clothing and Home Product Flow
+                        - Foods Product Flow
+                        - International Product Flow
+                        - Clothing and Home warehousing
+                        - Foods warehousing
+                        - International warehousing
+                        - Clothing and Home Transport
+                        - Foods Transport
+                        - International Transport
+                      enum:
+                        - chpf
+                        - fdpf
+                        - intpf
+                        - chwh
+                        - fdwh
+                        - intwh
+                        - chtp
+                        - fdtp
+                        - inttp
+                      default: chpf
+                - properties:
+                    tech_group:
+                      const: ct
+                    product_group:
+                      type: string
+                      title: Product Group
+                      ui:autofocus: true
+                      enumNames:
+                        - Clothing and Home Plan
+                        - Foods Plan
+                        - International Plan
+                        - Clothing and Home Design, Buy, Make
+                        - Foods Design, Buy, Make
+                        - International Design, Buy, Make
+                        - Clothing and Home Brands
+                      enum:
+                        - chpl
+                        - fdpl
+                        - intpl
+                        - chdm
+                        - fddm
+                        - intdm
+                        - chbr
+                      default: chpl
+                - properties:
+                    tech_group:
+                      const: gts
+                    product_group:
+                      type: string
+                      title: Product Group
+                      ui:autofocus: true
+                      enumNames:
+                        - Enterprise Service
+                        - Runtime
+                        - Enterprise Cloud Platform
+                        - On-Premise
+                        - App Definition & Development
+                        - Workspace Tech
+                        - Colleague Tech
+                        - Integration Services
+                        - Community Technology
+                        - Connectivity, Services and Solutions
+                        - Cloud9
+                      enum:
+                        - es
+                        - rntim
+                        - ecp
+                        - oprem
+                        - add
+                        - wrksp
+                        - coll
+                        - integ
+                        - comu
+                        - css
+                        - nine
+                      default: es
+                - properties:
+                    tech_group:
+                      const: gs
+                    product_group:
+                      type: string
+                      title: Product Group
+                      ui:autofocus: true
+                      enumNames:
+                        - Finance
+                        - Corporate Service
+                        - Bank Loyalty
+                        - HR
+                      enum:
+                        - fin
+                        - cs
+                        - hr
+                      default: fin
+                - properties:
+                    tech_group:
+                      const: ext
+                    product_group:
+                      type: string
+                      title: Product Group
+                      ui:autofocus: true
+                      enumNames:
+                        - Ocado
+                        - Company Name
+                      enum:
+                        - ocado
+                        - xyz
+                      default: ocado
+        team_name:
+          type: string
+          title: Name of the team
+          description: "Name of the Team. Only alphabets allowed. Maximum 37 characters. eg: events"
+          pattern: ^[a-z]+$
+          ui:autofocus: true
+          maxLength: 37
+        functional_access:
+          type: string
+          title: Functional Access
+          ui:autofocus: true
+          enumNames:
+            - Read Only
+            - Read Write
+          enum:
+            - read_only
+            - read_write
+          default: read_only
+        description:
+          type: string
+          title: Service Account Description
+          description: "Service account description. Only alphanumeric and specific special characters allowed.(-, _, ', ., &). Maximum 200 characters. eg: this is an pub event service account."
+          pattern: ^[a-zA-Z0-9-_\ \'\.\&]+$
+          ui:autofocus: true
+          maxLength: 200
+        email_addresses:
+          type: string
+          title: Email Addresses of team
+          description: "Email Addresses of the Team. Email addresses should be ending with mnscorp.net and multiple emails should be separated by (;). eg: john.smith@mnscorp.net;tony.blaze@mnscorp.net"
+          format: text
+          pattern: ^(([A-Za-z0-9._%+-]+@[mnscorp]+\.[net]{2,4}(;|$)\s?))*$
+          ui:autofocus: true
+          maxLength: 500
+
+
+  steps:
+    - id: fetchInput
+      name: Fetch Template inputs
+      action: fetch:template
+      input:
+        url: ./skeleton/service_account
+        values:
+          name: "${{ parameters.technology_group.tech_group }}-${{ parameters.technology_group.product_group }}-${{ parameters.team_name }}-${{ parameters.functional_access }}"
+          tech_group: "${{ parameters.technology_group.tech_group }}"
+          product_group: "${{ parameters.technology_group.product_group }}"
+          team_name: "${{ parameters.team_name }}"
+          description: "${{ parameters.description }}"
+          email_addresses: "${{ parameters.email_addresses | lower }}"
+
+    - id: publish
+      name: Publish
+      action: publish:github:pull-request
+      input:
+        repoUrl: 'github.com?repo=ep&owner=NarasimhamMantha'
+        title: 'Create Service Account for ${{ parameters.technology_group.tech_group }}-${{ parameters.technology_group.product_group }}-${{ parameters.team_name }}'
+        branchName: 'create-sa-${{ parameters.technology_group.tech_group }}-${{ parameters.technology_group.product_group }}-${{ parameters.team_name }}'
+        description: |
+          # New project: Kafka topic
+        targetPath: 'muziris-input/service_account'
+  output:
+    links:
+      - title: Follow link to Github repo and Pull request for next steps
+        url: '${{steps.publish.output.remoteUrl}}'
+    text: |
+      Read the [Confluence page](https://confluence.marksandspencer.app/pages/viewpage.action?pageId=173718191) for guidance.  
+      Get support by raising a ticket in [Jira](https://jira.marksandspencer.app/projects/EPLATFORM).  
+      For any other queries, please contact the Events Platform Team at grp-eventplatform@mnscorp.onmicrosoft.com
