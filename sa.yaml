@@ -324,7 +324,9 @@ spec:
     links:
       - title: Follow link to Github repo and Pull request for next steps
         url: '${{steps.publish.output.remoteUrl}}'
-    text: |
-      Read the [Confluence page](https://confluence.marksandspencer.app/pages/viewpage.action?pageId=173718191) for guidance.
-      Get support by raising a ticket in [Jira](https://jira.marksandspencer.app/projects/EPLATFORM).
-      For any other queries, please contact the Events Platform Team at grp-eventplatform@mnscorp.onmicrosoft.com
+    text:
+      - title: More Information
+        content: |
+          "Read the [Confluence page](https://confluence.marksandspencer.app/pages/viewpage.action?pageId=173718191) for guidance.
+          Get support by raising a ticket in [Jira](https://jira.marksandspencer.app/projects/EPLATFORM).
+          For any other queries, please contact the Events Platform Team at grp-eventplatform@mnscorp.onmicrosoft.com"
