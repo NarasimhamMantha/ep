@@ -1,8 +1,8 @@
 {
-	"name": "cust-perso-eventplatform-read_write",
+	"name": "cust-beam-rfrf-read_only",
 	"tech_group": "cust",
-	"product_group": "perso",
-	"team_name": "eventplatform",
-	"description": "Demo",
-	"email_addresses": "narasimham.mantha@mnscorp.net;renganayaki.k.parathalwar@mnscorp.net;sajeev.rajanusha@mnscorp.net;parit.shah@mnscorp.net"
+	"product_group": "beam",
+	"team_name": "rfrf",
+	"description": "ffff",
+	"email_addresses": "ffff@mnscorp.net"
 }
