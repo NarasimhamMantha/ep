@@ -1,8 +1,8 @@
 {
-	"name": "cust-perso-eventplatform-read_write",
-	"tech_group": "cust",
-	"product_group": "perso",
-	"team_name": "eventplatform",
-	"description": "Demo",
-	"email_addresses": "narasimham.mantha@mnscorp.net;renganayaki.k.parathalwar@mnscorp.net;sajeev.rajanusha@mnscorp.net;parit.shah@mnscorp.net"
+	"name": "str-chso-mqq-read_only",
+	"tech_group": "str",
+	"product_group": "chso",
+	"team_name": "mqq",
+	"description": "s1",
+	"email_addresses": "sds@mnscorp.net"
 }
