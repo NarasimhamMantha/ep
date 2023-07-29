@@ -13,17 +13,11 @@ metadata:
     - confluentcloud
     - serviceaccount
 spec:
-  owner: events-platform
+  owner: NarasimhamMantha
   type: service
-
   parameters:
     - title: Service Account Details
-      description: "Provide details on Service Account.
-                    Your team is only allowed two service accounts, one read and one read write.
-                    Service accounts span the entire organization, so they can own API keys for different environments: dev and prod clusters, and/or Kafka and Schema Registry.
-                    Because users can leave or change roles within a company, while applications continue to operate independently, service accounts are needed as they are not be tied to a specific user.
-                    Permissions to topics can be specified using ACLs
-                    See more details here: https://docs.confluent.io/cloud/current/access-management/identity/service-accounts.html#service-accounts"
+      description: "Provide details on Service Account. Your team is only allowed two service accounts, one read and one read write. Service accounts span the entire organization, so they can own API keys for different environments: dev and prod clusters, and/or Kafka and Schema Registry. Because users can leave or change roles within a company, while applications continue to operate independently, service accounts are needed as they are not be tied to a specific user. Permissions to topics can be specified using ACLs  See more details here: https://docs.confluent.io/cloud/current/access-management/identity/service-accounts.html#service-accounts"
       type: object
       required:
         - technology_group
@@ -330,7 +324,3 @@ spec:
     links:
       - title: Follow link to Github repo and Pull request for next steps
         url: '${{steps.publish.output.remoteUrl}}'
-    text: |
-      Read the [Confluence page](https://confluence.marksandspencer.app/pages/viewpage.action?pageId=173718191) for guidance.  
-      Get support by raising a ticket in [Jira](https://jira.marksandspencer.app/projects/EPLATFORM).  
-      For any other queries, please contact the Events Platform Team at grp-eventplatform@mnscorp.onmicrosoft.com
