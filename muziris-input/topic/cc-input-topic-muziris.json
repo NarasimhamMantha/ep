@@ -1,0 +1,18 @@
+{
+	"name": "cust-beam-dataengr-a2061-core-i1088_bp_instore_sales",
+	"environment": "dev",
+	"domain": "Product",
+	"tech_group": "cust",
+	"product_group": "beam",
+	"topic_category": "pub",
+	"team_name": "dataengr",
+	"functional_area": "core",
+	"application_id": "a2061",
+	"partitions": 1,
+	"retention_time": 604800000,
+	"retention_size": 524288000,
+	"message_max_size": 2097164,
+	"cleanup_policy": "delete",
+	"async_api_url": "https://github.com/DigitalInnovation/events-platform-asyncapi/blob/i0036topic/user-input/asyncapi.yaml",
+	"email_addresses": "yashaswini.ramamurthy@mnscorp.net"
+}

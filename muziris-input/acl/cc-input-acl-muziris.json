@@ -1,0 +1,30 @@
+{
+	"environment": "prod",
+	"tech_group": "sc",
+	"product_group": "chwh",
+	"team_name": "wmsops",
+	"service_account": "sc-chwh-wmsops-read_write",
+	"acls": [
+		{
+			"resource_type": "TOPIC",
+			"pattern": "PREFIXED",
+			"permission": "ALLOW",
+			"resource_name": "sc-chwh-wmsops-a1852",
+			"operation": "DESCRIBE"
+		},
+		{
+			"resource_type": "TOPIC",
+			"pattern": "PREFIXED",
+			"permission": "ALLOW",
+			"resource_name": "sc-chwh-wmsops-a1852",
+			"operation": "READ"
+		},
+		{
+			"resource_type": "TOPIC",
+			"pattern": "PREFIXED",
+			"permission": "ALLOW",
+			"resource_name": "sc-chwh-wmsops-a1852",
+			"operation": "WRITE"
+		}
+	]
+}
