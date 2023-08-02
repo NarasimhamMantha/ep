@@ -67,7 +67,7 @@ spec:
       action: publish:github:pull-request
       input:
         allowedHosts: ["github.com"]
-        repoUrl: 'github.com?repo=ep&owner=NarasimhamMantha'
+        repoUrl: ''github.com?repo=events-platform-resource-selfserve&owner=DigitalInnovation''
         description: 'This is ${{ parameters.environment }}'
         title: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
         branchName: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
@@ -76,4 +76,4 @@ spec:
   output:
     links:
       - title: follow Pull Request.
-        url: "https://github.com/NarasimhamMantha/ep/pull/${{ steps.publish.output.pullRequestNumber }}"
+        url: '${{steps.publish.output.remoteUrl}}'
