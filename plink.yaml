@@ -1,0 +1,77 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: create-topic-muziris-template
+  title: "Kafka: Create Kafka Private Link in Confluent Cloud for your Subscription"
+  annotations:
+    mnscorp.net/tutorial-url: "https://confluence.marksandspencer.app/display/CGE/PrivateLink+creation"
+  description: "Step-5: To Create Kafka Private Link in Confluent Cloud for your Subscription, use this template."
+  tags:
+    - kafka
+    - confluent
+    - confluentcloud
+    - topic
+    - privatelink
+spec:
+  owner: events-platform
+  type: service
+
+  parameters:
+    - title: Fill in some steps
+      required:
+        - description
+        - subscription
+        - environment
+      properties:
+        environment:
+          type: string
+          title: Name of the Environment for Topic
+          ui:autofocus: true
+            enumNames:
+              - Development
+              - Performance
+              - Production
+            enum:
+              - dev
+              - perf
+              - prod
+            default: dev         
+        subscription:
+          title: Subscription Name
+          type: object
+          ui:field: AzureSubscription
+          ui:autofocus: true    
+          #ui:options: 
+          #  selector: ['resourceGroup']       
+          description: Select Azure Subscription Name  to Create Private Link
+        description:
+          title: Description
+          type: string
+          description: A description for the component
+
+  # This template is meant to be used on top of an existing template.
+  # By adding the following and fetching from an absolute URL you can
+  # add in the docs template
+  steps:
+    - id: fetch
+      name: Template Docs Skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          environment: ${{ parameters.environment }}
+          description: ${{ parameters.description }}
+          subscription: ${{ parameters.subscription }}
+
+    - id: publish
+      name: Publish
+      action: publish:github:pull-request
+      input:
+        allowedHosts: ["github.com"]
+        repoUrl: 'github.com?repo=ep&owner=NarasimhamMantha'
+        description: This is ${{ parameters.name }}
+
+  output:
+    links:
+      - title: follow Pull Request.
+        url: "https://github.com/NarasimhamMantha/ep/pull/${{ steps.publish.output.pullRequestNumber }}"    
