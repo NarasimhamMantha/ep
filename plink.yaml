@@ -41,7 +41,6 @@ spec:
           title: Subscription Name
           type: object
           ui:field: AzureSubscription
-          ui:autofocus: true
           description: Select Azure Subscription Name  to Create Private Link
         description:
           title: Description
