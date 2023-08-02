@@ -1,3 +1,4 @@
+---
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
@@ -23,7 +24,7 @@ spec:
         - subscription
         - environment
       properties:
-      environment:
+        environment:
           type: string
           title: Name of the Environment for Topic
           ui:autofocus: true
@@ -35,23 +36,18 @@ spec:
               - dev
               - perf
               - prod
-            default: dev         
+            default: dev
         subscription:
           title: Subscription Name
           type: object
           ui:field: AzureSubscription
-          ui:autofocus: true    
-          #ui:options: 
-          #  selector: ['resourceGroup']       
+          ui:autofocus: true
           description: Select Azure Subscription Name  to Create Private Link
         description:
           title: Description
           type: string
           description: A description for the component
 
-  # This template is meant to be used on top of an existing template.
-  # By adding the following and fetching from an absolute URL you can
-  # add in the docs template
   steps:
     - id: fetch
       name: Template Docs Skeleton
@@ -74,4 +70,4 @@ spec:
   output:
     links:
       - title: follow Pull Request.
-        url: "https://github.com/NarasimhamMantha/ep/pull/${{ steps.publish.output.pullRequestNumber }}"    
+        url: "https://github.com/NarasimhamMantha/ep/pull/${{ steps.publish.output.pullRequestNumber }}"
