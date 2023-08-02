@@ -23,7 +23,7 @@ spec:
         - subscription
         - environment
       properties:
-        environment:
+      environment:
           type: string
           title: Name of the Environment for Topic
           ui:autofocus: true
