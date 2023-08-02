@@ -68,7 +68,7 @@ spec:
       input:
         allowedHosts: ["github.com"]
         repoUrl: 'github.com?repo=ep&owner=NarasimhamMantha'
-        description: 'This is ${{ parameters.name }}'
+        description: 'This is ${{ parameters.environment }}'
         title: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
         branchName: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
         targetPath: 'muziris-input/topic'  
