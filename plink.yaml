@@ -28,15 +28,15 @@ spec:
           type: string
           title: Name of the Environment for Topic
           ui:autofocus: true
-            enumNames:
-              - Development
-              - Performance
-              - Production
-            enum:
-              - dev
-              - perf
-              - prod
-            default: dev
+          enumNames:
+            - Development
+            - Performance
+            - Production
+          enum:
+            - dev
+            - perf
+            - prod
+          default: dev
         subscription:
           title: Subscription Name
           type: object
