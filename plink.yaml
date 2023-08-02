@@ -57,7 +57,7 @@ spec:
       action: fetch:template
       input:
         url: ./skeleton
-        values:
+          values:
           environment: ${{ parameters.environment }}
           description: ${{ parameters.description }}
           subscription: ${{ parameters.subscription }}
@@ -71,8 +71,7 @@ spec:
         description: 'This is ${{ parameters.environment }}'
         title: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
         branchName: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
-        targetPath: 'muziris-input/topic'  
-
+        targetPath: 'muziris-input/topic'
   output:
     links:
       - title: follow Pull Request.
