@@ -71,8 +71,6 @@ spec:
         description: 'This is ${{ parameters.name }}'
         title: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
         branchName: 'create-topic-${{ parameters.environment }}-${{ parameters.description }}'
-        gitAuthorName: '${{ user.entity.metadata.name }}'
-        gitAuthorEmail: '${{ user.entity.spec.profile.email }}'
         targetPath: 'muziris-input/topic'  
 
   output:
