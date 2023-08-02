@@ -2,7 +2,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: create-topic-muziris-template
+  name: create-privatelink-muziris-template
   title: "Kafka: Create Kafka Private Link in Confluent Cloud for your Subscription"
   annotations:
     mnscorp.net/tutorial-url: "https://confluence.marksandspencer.app/display/CGE/PrivateLink+creation"
