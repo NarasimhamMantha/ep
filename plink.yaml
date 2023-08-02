@@ -69,8 +69,8 @@ spec:
         allowedHosts: ["github.com"]
         repoUrl: 'github.com?repo=ep&owner=NarasimhamMantha'
         description: This is ${{ parameters.name }}
-        title: "create-topic-${{ parameters.environment }}-${{ parameters.description }}-${{ parameters.subscription }}"
-        branchName: "create-topic-${{ parameters.environment }}-${{ parameters.description }}-${{ parameters.subscription }}"
+        title: "create-topic-${{ parameters.environment }}-${{ parameters.description }}"
+        branchName: "create-topic-${{ parameters.environment }}-${{ parameters.description }}"
         gitAuthorName: '${{ user.entity.metadata.name }}'
         gitAuthorEmail: '${{ user.entity.spec.profile.email }}'
         description: |
