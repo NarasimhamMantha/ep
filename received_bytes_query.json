@@ -1,1 +1,2 @@
-{ "aggregations": [ { "metric": "io.confluent.kafka.server/received_bytes" } ], "filter": { "op": "AND", "filters": [ { "field": "resource.kafka.id", "op": "EQ", "value": "lkc-xw9vx" }, { "field": "metric.topic", "op": "EQ", "value": "Lpa_Account" } ]}, "granularity": "PT30M", "intervals": [ "2023-11-09T00:00:00/2023-11-09T23:59:59" ], "limit": 20 }
+{ "aggregations": [ { "metric": "io.confluent.kafka.server/received_bytes" } ], "filter": { "field": "resource.kafka.id", "op": "EQ", "value": "lkc-xw9vx"}, 
+  "granularity": "P1D", "group_by": [ "metric.topic" ], "intervals": ["2023-11-09T00:00:00/2023-11-09T123:59:59"], "limit": 2000 }
