@@ -38,7 +38,6 @@ jobs:
           ls -latr ./bin
           echo $PATH
           export PATH=$PATH:`pwd`/bin
-          set PATH=$PATH:`pwd`/bin
           echo $PATH
 
       - name: Verify Installations
