@@ -32,14 +32,9 @@ jobs:
 
       - name: Install Confluent Cloud CLI
         run: |
-          wget -qO - https://packages.confluent.io/deb/7.5/archive.key | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/7.5 stable main"
-          sudo apt-get update
-          sudo apt-get install -y ccloud
           sudo curl -sL --http1.1 https://cnfl.io/cli | sh -s -- latest
 
       - name: Verify Installations
         run: |
           http --version
-          ccloud --version
           confluent version
