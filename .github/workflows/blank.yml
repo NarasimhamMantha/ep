@@ -46,4 +46,4 @@ jobs:
           export PATH=$PATH:`pwd`/bin
           http --version
           confluent version
-          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json
+          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , .value] | @csv'
