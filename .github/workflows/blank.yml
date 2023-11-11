@@ -29,10 +29,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y httpie
+          http --version
 
       - name: Install Confluent Cloud CLI
         run: |
           sudo curl -sL --http1.1 https://cnfl.io/cli | sh -s -- latest
+          pwd
+          ls -latr ./bin
           echo $PATH
           export PATH=$PATH:./bin
           echo $PATH
