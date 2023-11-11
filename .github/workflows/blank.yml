@@ -33,8 +33,12 @@ jobs:
       - name: Install Confluent Cloud CLI
         run: |
           sudo curl -sL --http1.1 https://cnfl.io/cli | sh -s -- latest
+          echo $PATH
+          export PATH=$PATH:./bin
+          echo $PATH
 
       - name: Verify Installations
         run: |
+          echo $PATH
           http --version
           confluent version
