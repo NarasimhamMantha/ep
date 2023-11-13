@@ -48,3 +48,12 @@ jobs:
           confluent version
           # http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , .value] | @csv'
           http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'
+  
+      - name: Log in to Confluent Cloud
+        run: |
+          confluent login --save
+
+        env:
+          CCLOUD_EMAIL: ${{ secrets.CCLOUD_API_KEY }}
+          CCLOUD_PASSWORD: ${{ secrets.CCLOUD_API_SECRET }}        
+          
