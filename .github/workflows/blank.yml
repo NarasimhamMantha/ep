@@ -51,6 +51,7 @@ jobs:
   
       - name: Log in to Confluent Cloud
         run: |
+          export PATH=$PATH:`pwd`/bin
           confluent login --save
 
         env:
