@@ -53,8 +53,7 @@ jobs:
         run: |
           export PATH=$PATH:`pwd`/bin
           confluent login --save
-
         env:
-          CCLOUD_EMAIL: ${{ secrets.CCLOUD_API_KEY }}
-          CCLOUD_PASSWORD: ${{ secrets.CCLOUD_API_SECRET }}        
+          CONFLUENT_CLOUD_EMAIL: ${{ secrets.CONFLUENT_CLOUD_EMAIL }}
+          CONFLUENT_CLOUD_PASSWORD: ${{ secrets.CONFLUENT_CLOUD_PASSWORD }}        
           
