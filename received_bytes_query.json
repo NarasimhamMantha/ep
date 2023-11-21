@@ -1,5 +1,5 @@
 { "aggregations": [ { "metric": "io.confluent.kafka.server/received_bytes" } ], "filter": { "field": "resource.kafka.id", "op": "EQ",
 "value": "lkc-xw9vx"
 }, "granularity": "P1D", "group_by": [ "metric.topic" ], "intervals": [
-"2023-11-09T11:00:00-05:00/2023-11-09T23:59:59-05:00"
+"2023-11-21T11:00:00-05:00/2023-11-21T23:59:59-05:00"
 ], "limit": 4000 }
