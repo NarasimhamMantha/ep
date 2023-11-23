@@ -81,9 +81,9 @@ jobs:
           ls -al
           cat daily_billing.csv
           bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data in received_bytes_query.csv  -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -q -c -t ","
-          bcp kafkaeunnprodsqldb0001.dbo.daily_base in base.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-          sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT * from kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data"
-          sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT * from kafkaeunnprodsqldb0001.dbo.daily_base"
+          bcp kafkaeunnprodsqldb0001.dbo.daily_base in daily_billing.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+          sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT * from dbo.daily_trans_topics_data"
+          sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT * from dbo.daily_base"
           
           
           
