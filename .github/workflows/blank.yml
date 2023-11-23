@@ -68,7 +68,7 @@ jobs:
           #pip install mssql-cli
           ls -l /opt
           ls -lR /opt/mssql-tools/bin
-          /opt/mssql-tools/bin/sqlcmd --version
+          /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
           #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
 
       - name: Connect to Azure SQL Database
