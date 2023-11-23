@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ep-selfhosted
+    runs-on: ubuntu-latest
     env:
       SQL_SERVER: "kafkaeunnprodsqlserver0001.database.windows.net"
       SQL_DATABASE: "kafkaeunnprodsqldb0001"
@@ -66,6 +66,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install mssql-cli
+          mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
 
       - name: Connect to Azure SQL Database
         run: |
