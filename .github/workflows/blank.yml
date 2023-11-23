@@ -59,11 +59,13 @@ jobs:
           export PATH=$PATH:`pwd`/bin
           confluent login --save
           confluent billing cost list --start-date 2023-11-12 --end-date 2023-11-13 | grep -v "^-" |  sed 's/|/,/g' | tr -s ' ' | tr -d ' ' | sed 's/\$//g' 
+          confluent billing cost list --start-date 2023-11-12 --end-date 2023-11-13 | grep -v "^-" |  sed 's/|/,/g' | tr -s ' ' | tr -d ' ' | sed 's/\$//g' > daily_billing.csv
         env:
           CONFLUENT_CLOUD_EMAIL: ${{ secrets.CONFLUENT_CLOUD_EMAIL }}
           CONFLUENT_CLOUD_PASSWORD: ${{ secrets.CONFLUENT_CLOUD_PASSWORD }}        
       - name: Install dependencies
         run: |
+          export PATH=$PATH:`pwd`/bin
           #python -m pip install --upgrade pip
           #pip install mssql-cli
           ls -l /opt
@@ -73,4 +75,9 @@ jobs:
 
       - name: Connect to Azure SQL Database
         run: |
-          #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD    
+          #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD  
+          /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
+          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' > received_bytes_query.csv
+          ls -al
+          
+
