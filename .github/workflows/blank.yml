@@ -59,7 +59,7 @@ jobs:
           export PATH=$PATH:`pwd`/bin
           confluent login --save
           confluent billing cost list --start-date 2023-11-12 --end-date 2023-11-13 | grep -v "^-" |  sed 's/|/,/g' | tr -s ' ' | tr -d ' ' | sed 's/\$//g' 
-          confluent billing cost list --start-date 2023-11-12 --end-date 2023-11-13 | grep -v "^-" |  sed 's/|/,/g' | tr -s ' ' | tr -d ' ' | sed 's/\$//g' > daily_billing.csv
+          confluent billing cost list --start-date 2023-11-12 --end-date 2023-11-13 | grep -v "^-" |  sed 's/|/,/g' | tr -s ' ' | tr -d ' ' | sed 's/\$//g'  | tail -n +2 > daily_billing.csv
         env:
           CONFLUENT_CLOUD_EMAIL: ${{ secrets.CONFLUENT_CLOUD_EMAIL }}
           CONFLUENT_CLOUD_PASSWORD: ${{ secrets.CONFLUENT_CLOUD_PASSWORD }}        
@@ -79,5 +79,13 @@ jobs:
           /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
           http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' > received_bytes_query.csv
           ls -al
+          cat daily_billing.csv
+          bcp daily_base in daily_billing.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+          bcp daily_trans_topics_data in received_bytes_query.csv  -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -q -c -t ","
+          sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT * from daily_base"
+          sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT * from daily_trans_topics_data"
+          
+          
+          
           
 
