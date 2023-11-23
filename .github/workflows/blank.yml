@@ -66,8 +66,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install mssql-cli
-          mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
+          ls -Rl /opt
+          #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
 
       - name: Connect to Azure SQL Database
         run: |
-          mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD    
+          #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD    
