@@ -64,9 +64,10 @@ jobs:
           CONFLUENT_CLOUD_PASSWORD: ${{ secrets.CONFLUENT_CLOUD_PASSWORD }}        
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install mssql-cli
+          #python -m pip install --upgrade pip
+          #pip install mssql-cli
           ls -l /opt
+          ls -lR /opt/mssql-tools/bin
           /opt/mssql-tools/bin/sqlcmd --version
           #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
 
