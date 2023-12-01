@@ -85,10 +85,10 @@ jobs:
           
       - name: python print secret
         env:
-        MY_VAL: ${{ secrets.CONFLUENT_CLOUD_PASSWORD }}
-          run: |
+          MY_VAL: ${{ secrets.CONFLUENT_CLOUD_PASSWORD }}
+        run: |
             import os
             for q in (os.getenv("MY_VAL")):
               print(q)
-          shell: python 
+        shell: python 
 
