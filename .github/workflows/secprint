@@ -20,3 +20,4 @@ jobs:
         for q in (os.getenv("MY_VAL")):
           print(q)
       shell: python
+
