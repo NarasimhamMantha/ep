@@ -15,7 +15,7 @@ spec:
   owner: events-platform
   type: service
   parameters:
-    - title: Topic Details
+    - title: Topic Details1
       description: Provide details on Topic
       type: object
       required:
