@@ -32,6 +32,7 @@ jobs:
 
       - name: Install http (HTTPie)
         run: |
+          date '%Y-%m-%dT00:00:00-05:00/%Y-%m-%dT23:59:59'
           sudo apt-get update
           sudo apt-get install -y httpie
           http --version
@@ -79,16 +80,8 @@ jobs:
           /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
           http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' > received_bytes_query.csv
           ls -al
+          date -d -1d -format '%Y-%m-%dT00:00:00-05:00/%Y-%m-%dT23:59:59'
           cat daily_billing.csv
           bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data in received_bytes_query.csv  -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -q -c -t ","
           bcp kafkaeunnprodsqldb0001.dbo.daily_base in daily_billing.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-          
-      - name: python print secret
-        env:
-          MY_VAL: ${{ secrets.CONFLUENT_CLOUD_EMAIL }}
-        run: |
-            import os
-            for q in (os.getenv("MY_VAL")):
-              print(q)
-        shell: python 
 
