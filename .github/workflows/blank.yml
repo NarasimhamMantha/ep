@@ -32,7 +32,7 @@ jobs:
 
       - name: Install http (HTTPie)
         run: |
-          date '%Y-%m-%dT00:00:00-05:00/%Y-%m-%dT23:59:59'
+          date +"%Y-%m-%dT00:00:00-05:00/%Y-%m-%dT23:59:59-05:00"
           sudo apt-get update
           sudo apt-get install -y httpie
           http --version
