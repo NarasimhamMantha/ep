@@ -83,6 +83,6 @@ jobs:
           ls -al
           date -d -1d -format '%Y-%m-%dT00:00:00-05:00/%Y-%m-%dT23:59:59'
           cat daily_billing.csv
-          bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data in received_bytes_query.csv  -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -q -c -t ","
-          bcp kafkaeunnprodsqldb0001.dbo.daily_base in daily_billing.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+          #bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data in received_bytes_query.csv  -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -q -c -t ","
+          #bcp kafkaeunnprodsqldb0001.dbo.daily_base in daily_billing.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
 
