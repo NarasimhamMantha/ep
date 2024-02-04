@@ -52,6 +52,8 @@ jobs:
           # Displaying the results
           echo "Yesterday's date: $yesterday"
           echo "Today's date: $today"
+          pwd
+          ls -lR
 
 
       - name: Install Confluent Cloud CLI
