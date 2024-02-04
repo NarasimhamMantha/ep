@@ -77,8 +77,8 @@ jobs:
           # Displaying the results
           echo "Yesterday's date: $yesterday"
           echo "Today's date: $today"
-          sed -i 's/yesterday/$yesterday/g' received_bytes_query.json
-          sed -i 's/today/$today/g' received_bytes_query.json
+          sed -i "s/yesterday/$yesterday/g" received_bytes_query.json
+          sed -i "s/today/$today/g" received_bytes_query.json
           cat received_bytes_query.json
           
           # http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , .value] | @csv'
