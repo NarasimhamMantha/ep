@@ -39,6 +39,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y httpie
           http --version
+          start_date=$(date -jf "%Y-%m-01" "$(date '+%Y-%m-%d')" '+%Y-%m-%d')
+
+          # Current month's end date
+          end_date=$(date -jf "%Y-%m-%d" -v+1m -v-1d "$(date '+%Y-%m-01')" '+%Y-%m-%d')
+          
+          # Displaying the results
+          echo "Start date: $start_date"
+          echo "End date: $end_date"
+
 
       - name: Install Confluent Cloud CLI
         run: |
