@@ -133,7 +133,7 @@ jobs:
           ls -l /opt
           ls -lR /opt/mssql-tools/bin
           #/opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
-          /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "delete from daily_base"
+          /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "delete from daily_base" -d kafkaeunnprodsqldb0001
           #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
 
       - name: Connect to Azure SQL Database
