@@ -1,5 +1,5 @@
 { "aggregations": [ { "metric": "io.confluent.kafka.server/received_bytes" } ], "filter": { "field": "resource.kafka.id", "op": "EQ",
-"value": "lkc-xw9vx"
+"value": "clustername"
 }, "granularity": "P1D", "group_by": [ "metric.topic" ], "intervals": [
 "yesterdayT00:00:00/todayT00:00:00"
 ], "limit": 4000 }
