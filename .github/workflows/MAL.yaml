@@ -1,0 +1,30 @@
+name: Get MAL DATA
+
+on:
+  schedule:
+    - cron: "*/3 * * * *"
+
+jobs:
+  get-mal-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run bash script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAL_ID: ${{ secrets.MAL_ID }}
+          MAL_PASS: ${{ secrets.MAL_PASS }}
+          MAL_TENANT: ${{ secrets.MAL_TENANR }}
+          DAYS_THRESHOLD: 1
+        run: |
+          # Get all pull requests for the repository
+          az login --service-principal -u $MAL_ID -p $MAL_PASS --tenant $MAL_TENANT
+          MAL_TOKEN=`az account get-access-token | jq ".accessToken"`
+          MAL_REQUESTS=$(curl -H "Authorization: Bearer $MAL_TOKEN" \
+            "https://api.muziris.cloud.mnscorp.net/api/v1/apps/listAppsInfo?appName=Muziris&$top=4000" )
+          MAL_JSON=`curl -H "Authorization: Bearer $MAL_TOKEN" \
+            "https://api.muziris.cloud.mnscorp.net/api/v1/apps/listAppsInfo?appName=Muziris&$top=4000" | jq -r '.items[] | [.applicationID, .applicationName, .alias, .applicationStatus, .dataClassification, .businessPlatform, .productPortfolio, .productGroup, .productGroup, .product, .owner, .developedBy, .HostedBy, .supportedBy] | @csv' `
+          echo $MAL_JSON
+          
