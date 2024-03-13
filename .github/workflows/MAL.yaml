@@ -9,6 +9,9 @@ on:
     branches: [ "main" ]
     paths:
       - .github/workflows/MAL.yaml
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   get-mal-data:
