@@ -16,7 +16,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAL_ID: ${{ secrets.MAL_ID }}
           MAL_PASS: ${{ secrets.MAL_PASS }}
-          MAL_TENANT: ${{ secrets.MAL_TENANR }}
+          MAL_TENANT: ${{ secrets.MAL_TENANT }}
           DAYS_THRESHOLD: 1
         run: |
           # Get all pull requests for the repository
