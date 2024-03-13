@@ -30,20 +30,10 @@ jobs:
         run: |
           az account show
           az group list
-            
-      - name: Run bash script
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MAL_ID: ${{ secrets.MAL_ID }}
-          MAL_PASS: ${{ secrets.MAL_PASS }}
-          MAL_TENANT: ${{ secrets.MAL_TENANT }}
-          DAYS_THRESHOLD: 1
-
-        run: |
           # Get all pull requests for the repository
           az --version
           
-          az login --service-principal -u $MAL_ID -p $MAL_PASS --tenant $MAL_TENANT
+          #az login --service-principal -u $MAL_ID -p $MAL_PASS --tenant $MAL_TENANT
           echo "getting access token"
           MAL_TOKEN=`az account get-access-token | jq ".accessToken"`
           echo "TOKEN: $MAL_TOKEN
