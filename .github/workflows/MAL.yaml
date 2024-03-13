@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows/MAL.yml
+      - .github/workflows/MAL.yaml
 
 jobs:
   get-mal-data:
