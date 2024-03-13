@@ -27,7 +27,9 @@ jobs:
         run: |
           # Get all pull requests for the repository
           az login --service-principal -u $MAL_ID -p $MAL_PASS --tenant $MAL_TENANT
+          echo "getting access token"
           MAL_TOKEN=`az account get-access-token | jq ".accessToken"`
+          echo "TOKEN: $MAL_TOKEN
           MAL_REQUESTS=$(curl -H "Authorization: Bearer $MAL_TOKEN" \
             "https://api.muziris.cloud.mnscorp.net/api/v1/apps/listAppsInfo?appName=Muziris&$top=4000" )
           MAL_JSON=`curl -H "Authorization: Bearer $MAL_TOKEN" \
