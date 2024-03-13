@@ -34,3 +34,4 @@ jobs:
             "https://api.muziris.cloud.mnscorp.net/api/v1/apps/listAppsInfo?appName=Muziris&$top=4000" | jq -r '.items[] | [.applicationID, .applicationName, .alias, .applicationStatus, .dataClassification, .businessPlatform, .productPortfolio, .productGroup, .productGroup, .product, .owner, .developedBy, .HostedBy, .supportedBy] | @csv' `
           echo $MAL_JSON
           
+          
