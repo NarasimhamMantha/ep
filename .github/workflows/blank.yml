@@ -76,7 +76,7 @@ jobs:
           today=$(date '+%Y-%m-%d')
           
           # Displaying the results
-          for clustername in  "lkc-38p82m" "lkc-ojx6o" "lkc-nzvwz" "lkc-xw9vx" "lkc-kxo2p"
+          for clustername in  "lkc-38p82m"  "lkc-nzvwz" "lkc-xw9vx" 
           do
           echo $clustername
           echo "Yesterday's date: $yesterday"
@@ -106,13 +106,13 @@ jobs:
           today=`date +"%Y-%m-%d"`
           confluent  env use env-yyj2j
           sleep 5
-          sandpitcluster=`confluent kafka topic list --cluster lkc-kxo2p | sort | sed 's/ //g'  | wc -l`
+          #sandpitcluster=`confluent kafka topic list --cluster lkc-kxo2p | sort | sed 's/ //g'  | wc -l`
           PRIVATEDEV=`confluent kafka topic list --cluster lkc-38p82m | sort | sed 's/ //g'  | wc -l`
           
           
-          confluent  env use env-51rr8 
-          sleep 5
-          clusterperf=`confluent kafka topic list --cluster lkc-ojx6o | sort | sed 's/ //g'  | wc -l`
+          #confluent  env use env-51rr8 
+          #sleep 5
+          #clusterperf=`confluent kafka topic list --cluster lkc-ojx6o | sort | sed 's/ //g'  | wc -l`
           
           
           confluent  env use env-dwx7z
@@ -121,9 +121,9 @@ jobs:
           PUBLICPROD=`confluent kafka topic list --cluster lkc-nzvwz | sort | sed 's/ //g'  | wc -l`
           
           
-          echo "$today,lkc-kxo2p,sandpit-cluster-0,$sandpitcluster"
+          #echo "$today,lkc-kxo2p,sandpit-cluster-0,$sandpitcluster"
           echo "$today,lkc-38p82m,PRIVATE-DEV/PRE-PROD,$PRIVATEDEV"
-          echo "$today,lkc-ojx6o,cluster_perf_01,$clusterperf"
+          #echo "$today,lkc-ojx6o,cluster_perf_01,$clusterperf"
           echo "$today,lkc-xw9vx,DIGITAL-NEU-MULTIZONE-CLUSTER-02,$PROD"
           echo "$today,lkc-nzvwz,PUBLIC-PROD,$PUBLICPROD"
 
