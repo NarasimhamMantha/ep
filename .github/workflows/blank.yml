@@ -85,17 +85,17 @@ jobs:
           cp retained_bytes_query.json $clustername.retained_bytes_query.json
           cp sent_bytes_query.json $clustername.sent_bytes_query.json
           
-          sed -i "s/yesterday/$yesterday/g" $clustername.*.json
-          sed -i "s/today/$today/g" $clustername.*.json
-          sed -i "s/clustername/$clustername/g" $clustername.*.json
+          sed -i "s/yesterday/$yesterday/g" $clustername.*json
+          sed -i "s/today/$today/g" $clustername.*json
+          sed -i "s/clustername/$clustername/g" $clustername.*json
           
-          echo " ======= $clustername.received_bytes_query.json ========
+          echo " ======= $clustername.received_bytes_query.json ========"
           cat $clustername.received_bytes_query.json
           http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'
-          echo " ======= $clustername.retained_bytes_query.json ========
+          echo " ======= $clustername.retained_bytes_query.json ========"
           cat $clustername.retained_bytes_query.json
           http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.retained_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'
-          echo " ======= $clustername.sent_bytes_query.json ========
+          echo " ======= $clustername.sent_bytes_query.json ========"
           cat $clustername.sent_bytes_query.json
           http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.sent_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'
           
