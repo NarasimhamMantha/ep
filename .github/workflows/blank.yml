@@ -91,16 +91,28 @@ jobs:
           
           echo " ======= $clustername.received_bytes_query.json ========"
           cat $clustername.received_bytes_query.json
-          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' > $clustername.received_bytes_query.csv
+          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' | sed 's/T00:00:00Z//g' | sed 's/"//g' | sort | awk -F',' '$NF > 0.0' > $clustername.received_bytes_query.csv
           echo " ======= $clustername.retained_bytes_query.json ========"
           cat $clustername.retained_bytes_query.json
-          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.retained_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' > $clustername.retained_bytes_query.csv
+          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.retained_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' | sed 's/T00:00:00Z//g' | sed 's/"//g' | sort | awk -F',' '$NF > 0.0' > $clustername.retained_bytes_query.csv
           echo " ======= $clustername.sent_bytes_query.json ========"
           cat $clustername.sent_bytes_query.json
-          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.sent_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' > $clustername.sent_bytes_query.csv
+          http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < $clustername.sent_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'  | sed 's/T00:00:00Z//g' | sed 's/"//g' | sort | awk -F',' '$NF > 0.0' > $clustername.sent_bytes_query.csv
           
           done
           wc -l *.csv
+          PRIVATEDEV=` http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < lkc-38p82m.retained_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv' | wc -l`
+          PROD=`http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < lkc-xw9vx.retained_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'  | wc -l`
+          PUBLICPROD=`http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < lkc-nzvwz.retained_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'  | wc -l`
+          
+          
+          #echo "$today,lkc-kxo2p,sandpit-cluster-0,$sandpitcluster"
+          echo "$today,lkc-38p82m,PRIVATE-DEV/PRE-PROD,$PRIVATEDEV"
+          #echo "$today,lkc-ojx6o,cluster_perf_01,$clusterperf"
+          echo "$today,lkc-xw9vx,DIGITAL-NEU-MULTIZONE-CLUSTER-02,$PROD"
+          echo "$today,lkc-nzvwz,PUBLIC-PROD,$PUBLICPROD"
+
+
           # http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , .value] | @csv'
           # http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'
   
