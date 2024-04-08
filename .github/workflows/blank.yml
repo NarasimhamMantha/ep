@@ -106,11 +106,12 @@ jobs:
           PUBLICPROD=`http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < lkc-nzvwz.retained_bytes_query.json | jq -r  '.data[] |  [.timestamp , ."metric.topic" ,  .value] | @csv'  | wc -l`
           
           
-          #echo "$today,lkc-kxo2p,sandpit-cluster-0,$sandpitcluster"
-          echo "$today,lkc-38p82m,PRIVATE-DEV/PRE-PROD,$PRIVATEDEV"
-          #echo "$today,lkc-ojx6o,cluster_perf_01,$clusterperf"
-          echo "$today,lkc-xw9vx,DIGITAL-NEU-MULTIZONE-CLUSTER-02,$PROD"
-          echo "$today,lkc-nzvwz,PUBLIC-PROD,$PUBLICPROD"
+          #echo "$yesterday,lkc-kxo2p,sandpit-cluster-0,$sandpitcluster"
+          #echo "$yesterday,lkc-ojx6o,cluster_perf_01,$clusterperf"
+          echo "$yesterday,lkc-38p82m,PRIVATE-DEV/PRE-PROD,$PRIVATEDEV" > topiccount.csv
+          echo "$yesterday,lkc-xw9vx,DIGITAL-NEU-MULTIZONE-CLUSTER-02,$PROD" >> topiccount.csv
+          echo "$yesterday,lkc-nzvwz,PUBLIC-PROD,$PUBLICPROD" >> topiccount.csv
+          cat topiccount.csv
 
 
           # http 'https://api.telemetry.confluent.cloud/v2/metrics/cloud/query' --auth ${{ secrets.CC_KEY_FINOPS }} < received_bytes_query.json | jq -r  '.data[] |  [.timestamp , .value] | @csv'
@@ -127,32 +128,6 @@ jobs:
           echo "End date: $end_date"
           confluent login --save
           confluent billing cost list --start-date  $start_date --end-date  $end_date | grep -v "^-" |  sed 's/|/,/g' | tr -s ' ' | tr -d ' ' | sed 's/\$//g' | tail -n +2 > daily_billing.csv
-
-          
-          today=`date +"%Y-%m-%d"`
-          confluent  env use env-yyj2j
-          sleep 5
-          #sandpitcluster=`confluent kafka topic list --cluster lkc-kxo2p | sort | sed 's/ //g'  | wc -l`
-          PRIVATEDEV=`confluent kafka topic list --cluster lkc-38p82m | sort | sed 's/ //g'  | wc -l`
-          
-          
-          #confluent  env use env-51rr8 
-          #sleep 5
-          #clusterperf=`confluent kafka topic list --cluster lkc-ojx6o | sort | sed 's/ //g'  | wc -l`
-          
-          
-          confluent  env use env-dwx7z
-          sleep 5
-          PROD=`confluent kafka topic list --cluster lkc-xw9vx | sort | sed 's/ //g'  | wc -l`
-          PUBLICPROD=`confluent kafka topic list --cluster lkc-nzvwz | sort | sed 's/ //g'  | wc -l`
-          
-          
-          #echo "$today,lkc-kxo2p,sandpit-cluster-0,$sandpitcluster"
-          echo "$today,lkc-38p82m,PRIVATE-DEV/PRE-PROD,$PRIVATEDEV"
-          #echo "$today,lkc-ojx6o,cluster_perf_01,$clusterperf"
-          echo "$today,lkc-xw9vx,DIGITAL-NEU-MULTIZONE-CLUSTER-02,$PROD"
-          echo "$today,lkc-nzvwz,PUBLIC-PROD,$PUBLICPROD"
-
 
         env:
           CONFLUENT_CLOUD_EMAIL: ${{ secrets.CONFLUENT_CLOUD_EMAIL }}
