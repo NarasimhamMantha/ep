@@ -43,7 +43,8 @@ jobs:
 
     - name: Move Kafka to /opt directory
       run: |
-        sudo mv kafka_<version> /opt/kafka
+        ls -l
+        sudo mv kafka_2.12-3.7.0 /opt/kafka
 
     - name: Set up environment variables
       run: |
