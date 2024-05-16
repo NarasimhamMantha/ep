@@ -53,8 +53,8 @@ jobs:
 
     - name: Verify installation
       run: |
-      source ~/.bashrc
-      kafka-server-start.sh --version
+        source ~/.bashrc
+        kafka-server-start.sh --version
 
 
 
