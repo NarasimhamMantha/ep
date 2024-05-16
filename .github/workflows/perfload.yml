@@ -52,7 +52,9 @@ jobs:
         export PATH=$PATH:/opt/kafka/bin
 
     - name: Verify installation
-      run: kafka-server-start.sh --version
+      run: |
+      source ~/.bashrc
+      kafka-server-start.sh --version
 
 
 
