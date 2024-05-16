@@ -45,6 +45,7 @@ jobs:
       run: |
         ls -l
         sudo mv kafka_2.12-3.7.0 /opt/kafka
+        ls -l
 
     - name: Set up environment variables
       run: |
@@ -54,6 +55,7 @@ jobs:
     - name: Verify installation
       run: |
         source ~/.bashrc
+        export PATH=$PATH:/opt/kafka/bin
         kafka-server-start.sh --version
 
 
