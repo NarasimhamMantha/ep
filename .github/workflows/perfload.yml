@@ -1,0 +1,57 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Performance Load Test
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+    paths:
+      - .github/workflows/perfload.yml
+      
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      SQL_SERVER: "kafkaeunnprodsqlserver0001.database.windows.net"
+      SQL_DATABASE: "kafkaeunnprodsqldb0001"
+      SQL_USER: "kafkaadmin01"
+      SQL_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Java
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y default-jre httpie
+
+    - name: Download and extract Kafka
+      run: |
+        wget "https://downloads.apache.org/kafka/3.7.0/kafka_2.12-3.7.0.tgz"
+        tar -xzf kafka_2.12-3.7.0.tgz
+
+    - name: Move Kafka to /opt directory
+      run: |
+        sudo mv kafka_<version> /opt/kafka
+
+    - name: Set up environment variables
+      run: |
+        echo 'export PATH=$PATH:/opt/kafka/bin' >> ~/.bashrc
+        export PATH=$PATH:/opt/kafka/bin
+
+    - name: Verify installation
+      run: kafka-server-start.sh --version
+
+
+
