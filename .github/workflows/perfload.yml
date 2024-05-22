@@ -57,6 +57,7 @@ jobs:
         source ~/.bashrc
         export PATH=$PATH:/opt/kafka/bin
         kafka-server-start.sh --version
+        kafka-producer-perf-test.sh   --topic mytest1  --num-records 100000  --record-size 1000  --throughput 1000 --producer.config producer.preoperties.dev 
 
 
 
