@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ "testload" ]
     paths:
       - .github/workflows/blank.yml
       
@@ -140,6 +140,7 @@ jobs:
           ls -l /opt
           ls -lR /opt/mssql-tools/bin
           /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
+          sh test/exec_sqlcmd_may24.sh
           #/opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "delete from daily_base" -d kafkaeunnprodsqldb0001
           #bcp kafkaeunnprodsqldb0001.dbo.daily_base in daily_billing.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
           #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
