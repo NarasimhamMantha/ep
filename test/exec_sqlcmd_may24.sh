@@ -29,7 +29,7 @@ echo "deleting Old Daily data"
 sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -d kafkaeunnprodsqldb0001 -q "delete from daily_base;select * from daily_base; " < /dev/null
 
 echo "Loading Connector KSQL DB Costs"
-bcp kafkaeunnprodsqldb0001.dbo.daily_base in $HOME/test/Daily_May2024.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_base in Daily_May2024.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
 
 echo "Updating Support and Topic Costs"
 sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -d kafkaeunnprodsqldb0001  -q "update daily_base set EnvironmentID='SUPPORT' , ResourceID='SUPPORT' , ResourceDisplayName='SUPPORT' where LineType='SUPPORT';Exec update_price_topic_cku;" < /dev/null 

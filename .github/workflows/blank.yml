@@ -141,7 +141,7 @@ jobs:
           ls -lR /opt/mssql-tools/bin
           pwd
           echo $HOME
-          cd /home/runner/work/ep/ep
+          cd /home/runner/work/ep/ep/test
           /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
           sh test/exec_sqlcmd_may24.sh
           #/opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "delete from daily_base" -d kafkaeunnprodsqldb0001
