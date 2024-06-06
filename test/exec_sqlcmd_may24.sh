@@ -6,7 +6,7 @@ echo "Loading Uniq data into Dev Cluster"
 pwd
 echo Home $HOME
 ls -l $HOME/test
-cd $HOME/test
+cd /home/runner/work/ep/ep/test
 pwd
 bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_sent_dev      in  dev_sentbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
 bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_recv_dev      in  dev_receivedbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
