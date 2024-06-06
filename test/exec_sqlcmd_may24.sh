@@ -5,19 +5,21 @@ sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -d kafkaeunnprodsqldb0001 -q
 echo "Loading Uniq data into Dev Cluster"
 pwd
 echo Home $HOME
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_sent_dev   in  $HOME/test/dev_sentbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_recv_dev  in  $HOME/test/dev_receivedbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_retained_dev  in  $HOME/test/dev_retainedbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+ls -l $HOME/test
+cd $HOME/test
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_sent_dev      in  dev_sentbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_recv_dev      in  dev_receivedbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_retained_dev  in  dev_retainedbytes_May2024_uniq_final.csv -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
 
 echo "Loading Uniq data into Test Pd Cluster"
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_sent_prod    in $HOME/test/prod_sentbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_recv_prod   in $HOME/test/prod_receivedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_retained_prod   in $HOME/test/prod_retainedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_sent_prod       in prod_sentbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_recv_prod       in prod_receivedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_retained_prod   in prod_retainedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
 
 echo "Loading Uniq data into Test PP  Cluster"
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_sent_prod_public   in $HOME/test/prod-public_sentbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_recv_prod_public  in $HOME/test/prod-public_receivedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
-bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_retained_prod_public  in $HOME/test/prod-public_retainedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_sent_prod_public      in prod-public_sentbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_recv_prod_public      in prod-public_receivedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
+bcp kafkaeunnprodsqldb0001.dbo.daily_trans_topics_data_retained_prod_public  in prod-public_retainedbytes_May2024_uniq_final.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
 
 
 echo "==== exec update_daily_trans_topics_data_sent_recv_retained ====="
