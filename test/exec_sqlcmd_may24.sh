@@ -1,3 +1,4 @@
+echo pwd: `pwd`
 sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD -d kafkaeunnprodsqldb0001 -q "delete_daily_trans_topics_data_sent_recv_retained; " < /dev/null
 
 
