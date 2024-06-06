@@ -141,7 +141,6 @@ jobs:
           ls -lR /opt/mssql-tools/bin
           pwd
           echo $HOME
-          ls -l $HOME/test
           cd /home/runner/work/ep/ep
           /opt/mssql-tools/bin/sqlcmd -S $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q "SELECT @@VERSION"
           sh test/exec_sqlcmd_may24.sh
