@@ -144,6 +144,7 @@ jobs:
           bcp kafkaeunnprodsqldb0001.dbo.daily_base in daily_billing.csv  -S  $SQL_SERVER -U $SQL_USER -P $SQL_PASSWORD  -q -c -t ","
           #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD 
 
+
       - name: Connect to Azure SQL Database
         run: |
           #mssql-cli -S $SQL_SERVER -d $SQL_DATABASE -U $SQL_USER -P $SQL_PASSWORD  
